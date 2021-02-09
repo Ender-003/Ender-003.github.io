@@ -176,54 +176,6 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2020-11-28T06:12:00.000Z"><a href="/2020/11/28/课堂笔记整合/">2020-11-28</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2020/11/28/课堂笔记整合/">课堂笔记整合</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <ul>
-<li><p><a href="https://ender-003.github.io/2020/11/28/%E6%90%9C%E7%B4%A2%E7%AC%94%E8%AE%B0/">搜索</a></p>
-</li>
-<li><p><a href="https://ender-003.github.io/2020/12/19/%E5%88%86%E6%B2%BB%E7%AC%94%E8%AE%B0/">分治</a></p>
-</li>
-</ul>
-
-      
-    </div>
-    
-    <footer>
-        <div class="alignright">
-          
-          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
-        </div>
-        
-        
-  
-  <div class="tags">
-    <a href="/tags/OI/">OI</a>
-  </div>
-
-        <!-- partial('post/share') -->
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
         <time datetime="2020-11-28T06:12:00.000Z"><a href="/2020/11/28/搜索笔记/">2020-11-28</a></time>
       
       
@@ -264,6 +216,54 @@
 </ul>
 <h3 id="代码框架："><a href="#代码框架：" class="headerlink" title="代码框架："></a>代码框架：</h3><h5 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">全局状态变量</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(当前状态)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(当前状态是目标状态)    <span class="comment">// 判断</span></span><br><span class="line">        进行相应处理（计数、输出当前解、更新最优解、退出返回等）</span><br><span class="line">     <span class="comment">// 扩展</span></span><br><span class="line">    <span class="keyword">for</span>(所有可行的新状态)&#123;</span><br><span class="line">        <span class="keyword">if</span>(新状态没有访问过 &amp;&amp; 需要访问)&#123; <span class="comment">// 可行性剪枝、最优性剪枝、重复性剪枝</span></span><br><span class="line">            标记</span><br><span class="line">            dfs(新状态)</span><br><span class="line">            取消标记	<span class="comment">//回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    dfs(初始状态);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">全局状态变量</span><br><span class="line">定义状态队列</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">()</span></span>&#123;</span><br><span class="line">    初始状态入队</span><br><span class="line">    <span class="keyword">while</span>(队列不为空)&#123;</span><br><span class="line">        取出队首状态作为当前状态</span><br><span class="line">        <span class="keyword">if</span>(当前状态是目标状态)</span><br><span class="line">            进行相应处理（输出当前解、更新最优解、退出返回等）</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">for</span>(所有可行的新状态)&#123;</span><br><span class="line">                <span class="keyword">if</span>(新状态没有访问过 &amp;&amp; 需要访问)&#123;  <span class="comment">// 可行性剪枝、最优性剪枝、重复性剪枝</span></span><br><span class="line">                    新状态入队</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/OI/">OI</a>
+  </div>
+
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-11-28T06:12:00.000Z"><a href="/2020/11/28/课堂笔记整合/">2020-11-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2020/11/28/课堂笔记整合/">课堂笔记整合</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <ul>
+<li><p><a href="https://ender-003.github.io/2020/11/28/%E6%90%9C%E7%B4%A2%E7%AC%94%E8%AE%B0/">搜索</a></p>
+</li>
+<li><p><a href="https://ender-003.github.io/2020/12/19/%E5%88%86%E6%B2%BB%E7%AC%94%E8%AE%B0/">分治</a></p>
+</li>
+</ul>
 
       
     </div>
@@ -365,11 +365,11 @@
       </li>
     
       <li>
-        <a href="/2020/11/28/课堂笔记整合/">课堂笔记整合</a>
+        <a href="/2020/11/28/搜索笔记/">搜索笔记</a>
       </li>
     
       <li>
-        <a href="/2020/11/28/搜索笔记/">搜索笔记</a>
+        <a href="/2020/11/28/课堂笔记整合/">课堂笔记整合</a>
       </li>
     
       <li>
