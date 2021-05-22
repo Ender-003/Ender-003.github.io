@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Ender">
+    
+    
+    
+    
+    
+    
+    <title>最小生成树 | Ender_&#39;s Blog</title>
+    <link href="https://ender-003.github.io" rel="prefetch" />
+
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/bootstrap.min.js"></script>
+
+    
+<script src="/js/aos.js"></script>
+
+    
+<script src="/js/highslide/highslide-full.min.js"></script>
+
+    
+<link rel="stylesheet" href="/js/highslide/highslide.css">
+
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/source/imgs/yunru_iconfrom.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://ender-003.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">Ender_&#39;s Blog</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/categories">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/%E9%A2%93%E5%BA%9F/">颓废</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Hello-World/">Hello World</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/OI/">OI</a>
+                        </li>
+                        
+                        
+                        <li>
+                            <a href="/tags">...</a>
+                        </li>
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://ender-003.github.io">Ender_&#39;s Blog</a>
+        >
+        <span>最小生成树</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2021/05/22/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/OI/">OI</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2021-05-22
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2021/05/22/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2021-05-22
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/OI/">OI</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h1 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h1><p>通过前面的学习，对于含有 n 个顶点的连通图来说可能包含有多种生成树，例如图 1 所示：</p>
+<p><img src="https://gitee.com/limorton/typora-picgo/raw/master-picture/pic2021/2-1F911161130950.png" alt="img"></p>
+<center>图 1 连通图的生成树</center>
+
+<p>图 1 中的连通图和它相对应的生成树，可以用于解决实际生活中的问题：假设A、B、C 和 D 为 4 座城市，为了方便生产生活，要为这 4 座城市建立通信。对于 4 个城市来讲，本着节约经费的原则，只需要建立 3 个通信线路即可，就如图 1（b）中的任意一种方式。</p>
+<p>在具体选择采用（b）中哪一种方式时，需要综合考虑城市之间间隔的距离，建设通信线路的难度等各种因素，将这些因素综合起来用一个数值表示，当作这条线路的权值。</p>
+<p><img src="http://data.biancheng.net/uploads/allimg/170911/2-1F911161350260.png" alt=""></p>
+<center>图 2 无向网</center>
+
+<p>假设通过综合分析，城市之间的权值如 $图2(a)$ 所示，对于 $(b)$ 的方案中，选择权值总和为 7 的两种方案最节约经费。</p>
+<p>这就是本节要讨论的最小生成树的问题，简单得理解就是给定一个带有权值的连通图（连通网），如何从众多的生成树中筛选出权值总和最小的生成树，即为该图的最小生成树。</p>
+<p>给定一个连通网，求最小生成树的方法有： $Prim$ 算法和 $Kruskal$ 算法。</p>
+<h1 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h1><blockquote>
+<p>一种贪心的算法，适用于稠密图，时间复杂度 $O(n^2)$ 。</p>
+<p>核心思想：每次挑一条与当前集合相连的最短边。</p>
+</blockquote>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>普里姆算法在找最小生成树时，将顶点分为两类，一类是在查找的过程中已经包含在树中的（假设为 A 类），剩下的是另一类（假设为 B 类），并且 $Prim$ 算法总是维护最小生成树的一部分，类似 $Dijkstra$ 算法。</p>
+<p>对于给定的连通网，起始状态全部顶点都归为 B 类。在找最小生成树时，选定任意一个顶点作为起始点，并将之从 B 类移至 A 类；然后找出 B 类中到 A 类中的顶点之间权值最小的顶点，将之从 B 类移至 A 类，如此重复，直到 B 类中没有顶点为止。所走过的顶点和边就是该连通图的最小生成树。</p>
+<h2 id="切分定理"><a href="#切分定理" class="headerlink" title="切分定理"></a>切分定理</h2><blockquote>
+<p>❓为什么每次选最小边是正确的呢</p>
+</blockquote>
+<p>Prim 算法是基于切分定理的。</p>
+<ul>
+<li>切分（Cut）：把图中的节点分为两部分，称为一个切分。下图有个切分 $C = (S, T)，S = {A, B, D}，T = {C, E}$</li>
+</ul>
+<p><img src="https://gitee.com/limorton/typora-picgo/raw/master-picture/pic2021/64616_db57f71568-1.png" alt="img"></p>
+<ul>
+<li>横切边（ $Crossing Edge$ ）：如果一个边的两个顶点，分别属于切分的两部分，这个边称为横切边。比如上图的边 BC、BE、DE 就是横切边。</li>
+<li>切分定理：给定任意切分，横切边中权值最小的边必然属于最小生成树。<ul>
+<li>证明：假设原图切分后的两个部分各自组成了一棵最小生成子树，那么在这两个部分之间加入任意一条边都可以将形成整个图的生成树。很容易得知，加入所有横切边中权值最小的边就可以形成最小生成树。</li>
+</ul>
+</li>
+</ul>
+<h2 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h2><p>例如，通过普里姆算法查找图 2（a）的最小生成树的步骤为：</p>
+<p>假如从顶点A出发，顶点 B、C、D 到顶点 A 的权值分别为 2、4、2，所以，对于顶点 A 来说，顶点 B 和顶点 D 到 A 的权值最小，假设先找到的顶点 B：</p>
+<p><img src="http://data.biancheng.net/uploads/allimg/170911/2-1F911161I4302.png" alt="img"></p>
+<p>继续分析顶点 C 和 D，顶点 C 到 B 的权值为 3，到 A 的权值为 4；顶点 D 到 A 的权值为 2，到 B 的权值为无穷大（如果之间没有直接通路，设定权值为无穷大）。所以顶点 D 到 A 的权值最小：</p>
+<p><img src="http://data.biancheng.net/uploads/allimg/170911/2-1F911161S35D.png" alt="img"></p>
+<p>最后，只剩下顶点 C，到 A 的权值为 4，到 B 的权值和到 D 的权值一样大，为 3。所以该连通图有两个最小生成树：</p>
+<p><img src="https://gitee.com/limorton/typora-picgo/raw/master-picture/pic2021/2-1F911161910B7.png" alt="img"></p>
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>具体实现代码为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">S:当前已经在联通块中的所有点的集合</span></span><br><span class="line"><span class="comment">1. dist[i] = inf</span></span><br><span class="line"><span class="comment">2. for n 次</span></span><br><span class="line"><span class="comment">    t&lt;-S外离S最近的点</span></span><br><span class="line"><span class="comment">    利用t更新S外点到S的距离</span></span><br><span class="line"><span class="comment">    st[t] = true</span></span><br><span class="line"><span class="comment">n次迭代之后所有点都已加入到S中</span></span><br><span class="line"><span class="comment">联系：Dijkstra算法是更新到起始点的距离，Prim是更新到集合S的距离</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">510</span>, INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> g[N][N], dist[N];</span><br><span class="line"><span class="comment">//邻接矩阵存储所有边</span></span><br><span class="line"><span class="comment">//dist存储其他点到S的距离</span></span><br><span class="line"><span class="keyword">bool</span> st[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">prim</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//如果图不连通返回INF, 否则返回res</span></span><br><span class="line">    <span class="built_in">memset</span>(dist, INF, <span class="keyword">sizeof</span> dist);</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;<span class="comment">//总权值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> t = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) </span><br><span class="line">            <span class="keyword">if</span>(!st[j] &amp;&amp; (t == <span class="number">-1</span> || dist[t] &gt; dist[j]))</span><br><span class="line">                t = j;</span><br><span class="line">        <span class="comment">//寻找离集合S最近的点        </span></span><br><span class="line">        <span class="keyword">if</span>(i &amp;&amp; dist[t] == INF) <span class="keyword">return</span> INF;</span><br><span class="line">        <span class="comment">//判断是否连通，有无最小生成树</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(i) res += dist[t];</span><br><span class="line">        <span class="comment">//cout &lt;&lt; i &lt;&lt; &#x27; &#x27; &lt;&lt; res &lt;&lt; endl;</span></span><br><span class="line">        st[t] = <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">//更新最新S的权值和</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) dist[j] = <span class="built_in">min</span>(dist[j], g[t][j]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">int</span> u, v, w;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            <span class="keyword">if</span>(i ==j) g[i][j] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span> g[i][j] = INF;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(m--) &#123;</span><br><span class="line">        cin &gt;&gt; u &gt;&gt; v &gt;&gt; w;</span><br><span class="line">        g[u][v] = g[v][u] = <span class="built_in">min</span>(g[u][v], w);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> t = <span class="built_in">prim</span>();</span><br><span class="line">    <span class="keyword">if</span>(t == INF) <span class="built_in">puts</span>(<span class="string">&quot;impossible&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span> cout &lt;&lt; t &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>普里姆算法的运行效率只与连通网中包含的顶点数相关，而和网所含的边数无关。所以普里姆算法适合于解决边稠密的网，该算法运行的时间复杂度为：O(n^2)<em>O</em>(<em>n</em>2)。</p>
+<blockquote>
+<p>如果连通网中所含边的绸密度不高，则建议使用克鲁斯卡尔算法求最小生成树。</p>
+</blockquote>
+<h1 id="堆优化的Prim算法"><a href="#堆优化的Prim算法" class="headerlink" title="堆优化的Prim算法"></a>堆优化的Prim算法</h1><blockquote>
+<p>堆 $prime$ 的优化，主要从for循环里的两个for循环下手：</p>
+<p>第一个for循环是找最小值，方式使用堆进行优化；</p>
+<p>对第二个for循环，用邻接表进行操作。</p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>如果使用二叉堆，prim算法的复杂度能降到O(E log V)。</p>
+<p>之前实现的这个Prim算法，是用邻接矩阵表示图。而堆优化的Prim算法，将用邻接表来表示图，且使用最小堆来寻找，连接MST集合和非MST集合的边中，最小权值的那条边。</p>
+<p>基本思想：基本思想和原Prim算法大体相同，但此算法是，根据邻接表，通过广度优先遍历（BFS）来遍历所有节点，遍历的总操作为O(V+E)次数。同时使用最小堆存储非MST集合中的节点，每次遍历时用最小堆来选择节点。最小堆操作的时间复杂度为O(LogV)。</p>
+<h2 id="基本步骤"><a href="#基本步骤" class="headerlink" title="基本步骤"></a>基本步骤</h2><ol>
+<li>创建一个大小为V的最小堆，V是图的节点个数。最小堆的每个元素，存储的是节点id和节点的key值。</li>
+<li>初始化时，让堆的第一个元素作为最小生成树的根节点，赋值根节点的key值为0。其余节点的key值赋值为无穷大。 3.只要最小堆不为空，就重复以下步骤： (i)从最小堆中，抽取最小key值的节点，作为u。 (ii)对于u的每个邻接点v，检查v是否在最小堆中（即还没有加入到MST中）。如果v在最小堆中，且v的key值是大于边u-v的权值时，就更新v的key值为边u-v的权值。</li>
+</ol>
+<h2 id="示例代码-1"><a href="#示例代码-1" class="headerlink" title="示例代码"></a>示例代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">510</span>, MAXM = <span class="number">2</span> * <span class="number">1e5</span> + <span class="number">10</span>, INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">int</span> h[MAXM], e[MAXM], w[MAXM], ne[MAXM], idx;</span><br><span class="line"><span class="keyword">bool</span> vis[MAXN];</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Prim</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="literal">false</span>, <span class="keyword">sizeof</span> vis);</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>, cnt = <span class="number">0</span>;</span><br><span class="line">    priority_queue&lt;PII, vector&lt;PII&gt;, greater&lt;PII&gt;&gt; q;</span><br><span class="line">    q.<span class="built_in">push</span>(&#123;<span class="number">0</span>, <span class="number">1</span>&#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">auto</span> t = q.<span class="built_in">top</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">int</span> ver = t.second, dst = t.first;</span><br><span class="line">        <span class="keyword">if</span> (vis[ver]) <span class="keyword">continue</span>;</span><br><span class="line">        vis[ver] = <span class="literal">true</span>, sum += dst, ++cnt;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = h[ver]; i != <span class="number">-1</span>; i = ne[i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> j = e[i];</span><br><span class="line">            <span class="keyword">if</span> (!vis[j]) &#123;</span><br><span class="line">                q.<span class="built_in">push</span>(&#123;w[i], j&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (cnt != n) <span class="keyword">return</span> INF;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="built_in">memset</span>(h, <span class="number">-1</span>, <span class="keyword">sizeof</span> h);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> a, b, w;</span><br><span class="line">        cin &gt;&gt; a &gt;&gt; b &gt;&gt; w;</span><br><span class="line">        <span class="built_in">add</span>(a, b, w);</span><br><span class="line">        <span class="built_in">add</span>(b, a, w);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> t = <span class="built_in">Prim</span>();</span><br><span class="line">    <span class="keyword">if</span> (t == INF) cout &lt;&lt; <span class="string">&quot;impossible&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">else</span> cout &lt;&lt; t &lt;&lt; endl; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>使用二叉堆，prim算法的复杂度降到了 $O(E log V)$ 。</p>
+<h1 id="克鲁斯卡尔算法-Kruskal算法"><a href="#克鲁斯卡尔算法-Kruskal算法" class="headerlink" title="克鲁斯卡尔算法(Kruskal算法)"></a>克鲁斯卡尔算法(Kruskal算法)</h1><blockquote>
+<p>适用于稀疏图，时间复杂度 O(mlogm)<em>O</em>(<em>m<strong>l</strong>o<strong>g</strong>m</em>)。</p>
+<p>核心思想：从小到大挑不多余的边。</p>
+</blockquote>
+<p>之前介绍了求最小生成树之普里姆算法。该算法从顶点的角度为出发点，时间复杂度为O(n^2)<em>O</em>(<em>n</em>2)，更适合与解决边的绸密度更高的连通网。</p>
+<p>本节所介绍的克鲁斯卡尔算法，从边的角度求网的最小生成树，时间复杂度为O(E\log E)<em>O</em>(<em>E</em>log<em>E</em>)。和普里姆算法恰恰相反，更适合于求边稀疏的网的最小生成树。</p>
+<p>对于任意一个连通网的最小生成树来说，在要求总的权值最小的情况下，最直接的想法就是将连通网中的所有边按照权值大小进行升序排序，从小到大依次选择。</p>
+<p>由于最小生成树本身是一棵生成树，所以需要时刻满足以下两点：</p>
+<ul>
+<li>生成树中任意顶点之间有且仅有一条通路，也就是说，生成树中不能存在回路；</li>
+<li>对于具有 n 个顶点的连通网，其生成树中只能有 n-1 条边，这 n-1 条边连通着 n 个顶点。</li>
+</ul>
+<blockquote>
+<p>连接 n 个顶点在不产生回路的情况下，只需要 n-1 条边。</p>
+</blockquote>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>所以克鲁斯卡尔算法的具体思路是：将所有边按照权值的大小进行升序排序，然后从小到大一一判断，条件为：如果这个边不会与之前选择的所有边组成回路，就可以作为最小生成树的一部分；反之，舍去。直到具有 n 个顶点的连通网筛选出来 n-1 条边为止。筛选出来的边和所有的顶点构成此连通网的最小生成树。</p>
+<blockquote>
+<p>判断是否会产生回路的方法为：在初始状态下给每个顶点赋予不同的标记，对于遍历过程的每条边，其都有两个顶点，判断这两个顶点的标记是否一致，如果一致，说明它们本身就处在一棵树中，如果继续连接就会产生回路；如果不一致，说明它们之间还没有任何关系，可以连接。</p>
+</blockquote>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>假设遍历到一条由顶点 A 和 B 构成的边，而顶点 A 和顶点 B 标记不同，此时不仅需要将顶点 A 的标记更新为顶点 B 的标记，还需要更改所有和顶点 A 标记相同的顶点的标记，全部改为顶点 B 的标记。</p>
+<p><img src="https://gitee.com/limorton/typora-picgo/raw/master-picture/pic2021/2-1F911163R01W.png" alt="img"></p>
+<center>图 1 连通网</center>
+
+<p>例如，使用克鲁斯卡尔算法找图 1 的最小生成树的过程为：</p>
+<p>首先，在初始状态下，对各顶点赋予不同的标记（用颜色区别），如下图所示：</p>
+<p><img src="https://gitee.com/limorton/typora-picgo/raw/master-picture/pic2021/2-1F91116422K37.png" alt="img"></p>
+<center>（1）</center>
+
+<p>对所有边按照权值的大小进行排序，按照从小到大的顺序进行判断，首先是（1，3），由于顶点 1 和顶点 3 标记不同，所以可以构成生成树的一部分，遍历所有顶点，将与顶点 3 标记相同的全部更改为顶点 1 的标记，如（2）所示：</p>
+<p><img src="https://gitee.com/limorton/typora-picgo/raw/master-picture/pic2021/2-1F911163922M6.png" alt="img"></p>
+<center>（2）</center>
+
+<p>其次是（4，6）边，两顶点标记不同，所以可以构成生成树的一部分，更新所有顶点的标记为：</p>
+<p><img src="https://gitee.com/limorton/typora-picgo/raw/master-picture/pic2021/2-1F91116431A11.png" alt="img"></p>
+<center>（3）</center>
+
+<p>其次是（2，5）边，两顶点标记不同，可以构成生成树的一部分，更新所有顶点的标记为：</p>
+<p><img src="https://gitee.com/limorton/typora-picgo/raw/master-picture/pic2021/2-1F911164335108.png" alt="img"></p>
+<center>（4）</center>
+
+<p>然后最小的是（3，6）边，两者标记不同，可以连接，遍历所有顶点，将与顶点 6 标记相同的所有顶点的标记更改为顶点 1 的标记：</p>
+<p><img src="https://gitee.com/limorton/typora-picgo/raw/master-picture/pic2021/2-1F91116435D40.png" alt="img"></p>
+<center>（5）</center>
+
+<p>继续选择权值最小的边，此时会发现，权值为 5 的边有 3 个，其中（1，4）和（3，4）各自两顶点的标记一样，如果连接会产生回路，所以舍去，而（2，3）标记不一样，可以选择，将所有与顶点 2 标记相同的顶点的标记全部改为同顶点 3 相同的标记：</p>
+<p><img src="https://gitee.com/limorton/typora-picgo/raw/master-picture/pic2021/2-1F91116442R29.png" alt="img"></p>
+<center>（6）</center>
+
+<p>当选取的边的数量相比与顶点的数量小 1 时，说明最小生成树已经生成。所以最终采用克鲁斯卡尔算法得到的最小生成树为（6）所示。</p>
+<h2 id="示例代码-2"><a href="#示例代码-2" class="headerlink" title="示例代码"></a>示例代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>, M = <span class="number">4e5</span> + <span class="number">10</span>, INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> p[N];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a, b, w;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> Edge &amp;e) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> w &lt; e.w;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; es[M];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (p[x] != x) p[x] = <span class="built_in">find</span>(p[x]);</span><br><span class="line">    <span class="keyword">return</span> p[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kruskal</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>, res = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">sort</span>(es, es + m);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) p[i] = i;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> a = es[i].a, b = es[i].b, w = es[i].w;</span><br><span class="line">        a = <span class="built_in">find</span>(a), b = <span class="built_in">find</span>(b);</span><br><span class="line">        <span class="keyword">if</span> (a != b) &#123;</span><br><span class="line">            p[a] = b;</span><br><span class="line">            res += w;</span><br><span class="line">            cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (cnt &lt; n - <span class="number">1</span>) <span class="keyword">return</span> INF;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> a, b, w;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;a, &amp;b, &amp;w);</span><br><span class="line">        es[i] = &#123;a, b, w&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> t = <span class="built_in">kruskal</span>();</span><br><span class="line">    <span class="keyword">if</span> (t == INF) cout &lt;&lt; <span class="string">&quot;impossible&quot;</span>;</span><br><span class="line">    <span class="keyword">else</span> cout &lt;&lt; t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="javascript:;">Copy</a></p>
+<h2 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h2><p>排序：O(E\log E)<em>O</em>(<em>E</em>log<em>E</em>)，采用并查集选边合并：O(E\alpha (V))<em>O</em>(<em>E**α</em>(<em>V</em>))，总时间复杂度：O(E\log E)<em>O</em>(<em>E</em>log<em>E</em>)</p>
+<h1 id="对比两种最小生成树算法"><a href="#对比两种最小生成树算法" class="headerlink" title="对比两种最小生成树算法"></a>对比两种最小生成树算法</h1><h2 id="Kruskal算法"><a href="#Kruskal算法" class="headerlink" title="Kruskal算法"></a>Kruskal算法</h2><p>此算法可以称为“加边法”，初始最小生成树边数为0，每迭代一次就选择一条满足条件的最小代价边，加入到最小生成树的边集合里。 1. 把图中的所有边按代价从小到大排序； 2. 把图中的n个顶点看成独立的n棵树组成的森林； 3. 按权值从小到大选择边，所选的边连接的两个顶点ui,viui,vi,应属于两颗不同的树，则成为最小生成树的一条边，并将这两颗树合并作为一颗树。 4. 重复(3),直到所有顶点都在一颗树内或者有n-1条边为止。</p>
+<h2 id="Prim算法-1"><a href="#Prim算法-1" class="headerlink" title="Prim算法"></a>Prim算法</h2><p>此算法可以称为“加点法”，每次迭代选择代价最小的边对应的点，加入到最小生成树中。算法从某一个顶点s开始，逐渐长大覆盖整个连通网的所有顶点。</p>
+<ol>
+<li>图的所有顶点集合为V；初始令集合u={s},v=V−u;</li>
+<li>在两个集合u,v能够组成的边中，选择一条代价最小的边(u0,v0)，加入到最小生成树中，并把v0并入到集合u中。</li>
+<li>重复上述步骤，直到最小生成树有n-1条边或者n个顶点为止。</li>
+</ol>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Ender
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/source/imgs/yunru_iconfrom.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/05/22/LaTeX,KaTeX/">LaTeX/KaTeX语法集合 --- By 离散小波变换°</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/05/22/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/04/24/%E5%9B%BE%E7%AC%94%E8%AE%B0-%20%E2%85%A1/">图笔记 Ⅱ(存储&amp;便利)</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/04/24/%E5%9B%BE%E7%AC%94%E8%AE%B0-%E2%85%A0(%E6%80%A7%E8%B4%A8)/">图笔记 Ⅰ(性质)</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/04/24/%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E6%B3%95/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/02/25/How-To-Use-Free-VN/">How To Use Free V*N</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/12/19/%E5%88%86%E6%B2%BB%E7%AC%94%E8%AE%B0/">分治笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/12/05/%E4%B8%AA%E4%BA%BA%E6%94%B6%E5%BD%95%E9%A2%93%E5%BA%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%90%88%E9%9B%86/">个人收录的颓废小游戏合集</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/11/28/%E6%90%9C%E7%B4%A2%E7%AC%94%E8%AE%B0/">搜索笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/11/28/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0%E6%95%B4%E5%90%88/">课堂笔记整合</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/02/25/How-To-Use-Free-VN/">How To Use Free V*N</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/12/05/%E4%B8%AA%E4%BA%BA%E6%94%B6%E5%BD%95%E9%A2%93%E5%BA%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%90%88%E9%9B%86/">个人收录的颓废小游戏合集</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/12/19/%E5%88%86%E6%B2%BB%E7%AC%94%E8%AE%B0/">分治笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/05/22/LaTeX,KaTeX/">LaTeX/KaTeX语法集合 --- By 离散小波变换°</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/04/24/%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E6%B3%95/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/04/24/%E5%9B%BE%E7%AC%94%E8%AE%B0-%20%E2%85%A1/">图笔记 Ⅱ(存储&amp;便利)</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/04/24/%E5%9B%BE%E7%AC%94%E8%AE%B0-%E2%85%A0(%E6%80%A7%E8%B4%A8)/">图笔记 Ⅰ(性质)</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/11/28/%E6%90%9C%E7%B4%A2%E7%AC%94%E8%AE%B0/">搜索笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/05/22/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/11/28/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0%E6%95%B4%E5%90%88/">课堂笔记整合</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2021/05/22/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2021/05/22/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2021/05/22/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/%E9%A2%93%E5%BA%9F/" style="font-size: 11.58521175932291px;" class="tag-cloud-link">颓废</a>
+    
+    <a href="/tags/Hello-World/" style="font-size: 11.02081236420442px;" class="tag-cloud-link">Hello World</a>
+    
+    <a href="/tags/OI/" style="font-size: 9.469500172871278px;" class="tag-cloud-link">OI</a>
+    
+    <a href="/tags/%E5%90%88%E9%9B%86/" style="font-size: 13.16212109309641px;" class="tag-cloud-link">合集</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://kdays.net/days/" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="http://www.gal123.com/" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="http://www.moe123.com/" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/ZEROKISEKI/" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://coding.net/u/SORA1" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/aonosora/activities" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Ender Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+<script src="/js/activate-power-mode.js"></script>
+
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+
+</html>
